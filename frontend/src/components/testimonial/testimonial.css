@@ -1,0 +1,22 @@
+.testimonial-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  /* Testimonial Card */
+  .testimonial {
+    background-color: #b99595;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    width: 100%;
+  }
+  
+  /* Testimonial Author */
+  .testimonial-author {
+    margin-top: 10px;
+    font-style: italic;
+    color: #777;
+  }

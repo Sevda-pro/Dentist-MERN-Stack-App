@@ -1,0 +1,61 @@
+.signup {
+    background-image: url('./dentist1.jpg');
+    background-size: cover;
+    height: 100vh;
+    width: 100%;
+}
+
+.frame {
+    width: 500px;
+    height: 500px;
+    perspective: 1000px;
+    /* Adjust the perspective value */
+}
+
+.shape {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(47, 61, 98);
+    transform: rotateY(25deg);
+    /* Apply a 3D rotation effect */
+    transition: all 3s ease;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+}
+.formdiv{
+    margin-top: 50px;
+    margin-left: 20px;
+}
+.formdiv label {
+    color: aliceblue;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.formdiv input {
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.signupbtn{
+position: absolute;
+top: 300px;
+left: 30px;
+width: 80px;
+}
+.signupbtn:hover{
+    background-color:rgb(55, 131, 115);
+}
+.loginbtn{
+    position: absolute;
+    top: 300px;
+    right: 50px;
+    width: 80px;
+    }
+    .loginbtn:hover{
+        background-color:rgb(55, 131, 115);
+    }
