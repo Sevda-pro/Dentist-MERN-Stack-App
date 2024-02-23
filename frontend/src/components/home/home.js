@@ -97,7 +97,7 @@ export default function Home() {
                 </div>
                 <div>
                     <p>&copy; 2024 Dental Practice</p>
-                    <p>Designed by Your Name</p>
+                    <p>Designed by Sahil Sevda</p>
                 </div>
             </div>
 
