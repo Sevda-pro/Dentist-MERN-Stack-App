@@ -1,7 +1,15 @@
 import { BrowserRouter as Router, Route, Routes, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './home.css'
+import { IoIosLogOut } from "react-icons/io";
+
 export default function Home() {
+  const navigate=useNavigate();
+  const handlelogoutbtn=async(e)=>{
+    e.preventDefault();
+     localStorage.clear();
+     navigate('/login')
+  }
     return (<div>
         <header>
       
@@ -40,6 +48,9 @@ export default function Home() {
       </NavLink>
       <NavLink to="/FAQsection" className="navlinkclass">
         FAQ Section
+      </NavLink>
+      <NavLink onClick={handlelogoutbtn} className='logologoutbtn' >
+      <IoIosLogOut size={30}/>
       </NavLink>
     </header>
         <section>

@@ -8,4 +8,7 @@
 .navlinkclass:hover {
     color: #ddd;
   }
-  
+  .logologoutbtn{
+    position: absolute;
+    right: 5px;
+  }
