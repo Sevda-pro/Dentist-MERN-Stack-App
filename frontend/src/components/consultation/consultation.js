@@ -17,7 +17,7 @@ const OnlineConsultation = () => {
     let obj={
       name:name,
       email:email,
-      message:message
+      message:question
     }
     let res=await axios.post(`${process.env.REACT_APP_API_KEY}/consultation`,obj, { headers: { Authorization: token } });
     if(res.status==200)
