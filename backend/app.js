@@ -16,6 +16,8 @@ const OWN_URL = process.env.OWN_URL || 'http://localhost:5000'
 const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 const User = require('./models/signup.js')
 const Appointment=require('./models/appointment.js')
+const premium_route=require('./routes/premium.js')
+app.use('/purchase',premium_route)
 const authentication = async (req, res, next) => {
     try {
 
