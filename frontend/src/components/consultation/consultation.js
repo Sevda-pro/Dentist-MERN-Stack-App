@@ -1,61 +1,58 @@
 // OnlineConsultation.js
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, NavLink, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Razorpay from 'razorpay';
+import useRazorpay from "react-razorpay";
 const OnlineConsultation = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [question, setQuestion] = useState('');
     const [submitted, setSubmitted] = useState(false);
-
+    const [paymentSuccess, setPaymentSuccess] = useState(false);
+    const [Razorpay] = useRazorpay();
     const handleFormSubmit = (e) => {
         e.preventDefault();
         setSubmitted(true);
     };
-    // async function paymentProcess(e) {
-    //   try {
-    //     const token = localStorage.getItem("token");
+    async function paymentProcess(e) {
+      try {
+        const token = localStorage.getItem("token");
     
-    //     const response = await axios.get(`${process.env.REACT_APP_API_KEY}/purchase/premiummembership`, { headers: { "Authorization": token } });
+        const response = await axios.get(`${process.env.REACT_APP_API_KEY}/purchase/premiummembership`, { headers: { Authorization: token } });
     
-    //     var options = {
-    //       key: response.data.key_id,
-    //       order_id: response.data.order.id,
+        var options = {
+          key: response.data.key_id,
+          order_id: response.data.order.id,
     
-    //       handler: async function (response) {
-    //         const res = await axios.post(
-    //           `${process.env.REACT_APP_API_KEY}/purchase/updatetransactionstatus/success`,
-    //           {
-    //             order_id: options.order_id,
-    //             payment_id: response.razorpay_payment_id,
-    //           },
-    //           { headers: { Authorization: token } }
-    //         );
-            
-    //       },
-    //     };
-    //     const rzp1 = new Razorpay(options);
-    //     rzp1.open();
-    //     e.preventDefault();
-    //     rzp1.on("payment.failed", async function (response) {
-    //       // console.log(error);
-    
-    //       await axios.post(
-    //         `${process.env.REACT_APP_API_KEY}/purchase/updatetransactionstatus/failed`,
-    //         {
-    //           order_id: response.error.metadata.order_id,
-    //           payment_id: response.error.metadata.payment_id,
-    //         },
-    //         { headers: { Authorization: token } }
-    //       );
-    //       alert("something went wrong");
-    //     });
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // }
+          handler: async function (response) {
+            const res = await axios.post(
+              `${process.env.REACT_APP_API_KEY}/purchase/updatetransactionstatus/success`,
+              {
+                order_id: options.order_id,
+                payment_id: response.razorpay_payment_id,
+              },
+              { headers: { Authorization: token } }
+            );
+          },
+        };
+        const rzp1 = new Razorpay(options);
+        rzp1.open();
+        e.preventDefault();
+        rzp1.on("payment.failed", async function (response) {    
+          await axios.post(
+            `${process.env.REACT_APP_API_KEY}/purchase/updatetransactionstatus/failed`,
+            {
+              order_id: response.error.metadata.order_id,
+              payment_id: response.error.metadata.payment_id,
+            },
+            { headers: { Authorization: token } }
+          );
+          alert("something went wrong");
+        });
+      } catch (err) {
+        console.log(err)
+      }
+    }
     return (
         <div>
             <header>
@@ -102,7 +99,7 @@ const OnlineConsultation = () => {
             {submitted ? (
                 <p>Thank you for submitting your questions. Our team will get back to you shortly.</p>
             ) : (
-                <form onSubmit={handleFormSubmit}>
+                <form>
                     <label htmlFor="name">Your Name:</label>
                     <input
                         type="text"
@@ -130,7 +127,8 @@ const OnlineConsultation = () => {
                     ></textarea>
                     <br /><br />
                     <button onClick={paymentProcess}>Payment</button>
-                </form>
+                    {/* {paymentSuccess && <button onClick={handleFormSubmit}>Submit</button>} */}
+                  </form>
             )}
         </section>
         </div>

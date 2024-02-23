@@ -1,7 +1,8 @@
-const Razorpay=require('razorpay')
-const Order=require('../models/premium.js')
-const User=require('../models/signup.js')
-require('dotenv').config()
+const Razorpay = require('razorpay');
+const Order = require('../models/premium.js');
+const User = require('../models/signup.js');
+require('dotenv').config();
+
 const purchasePremium = async (req, res, next) => {
 	try {
 		var rzp = new Razorpay({
@@ -34,26 +35,24 @@ const purchasePremium = async (req, res, next) => {
 const updateTransactionStatus = async (req, res, next) => {
 	try {
 		const { payment_id, order_id } = req.body;
-		const order = await Order.findOne({ orderid: order_id  });
-		const promise1 = order.update({ paymentid: payment_id, status: "successfull" });
+		const order = await Order.findOne({ orderid: order_id });
+
+		await Order.updateOne({ orderid: order_id }, { $set: { paymentid: payment_id, status: "successfull" } });
+		
 		const customer = await User.findOne({  _id: req.user._id } );
-		const promise2 = customer.update({ isPremiumUser: true }, {
-			where: {
-				isPremiumUser: null
-			}
-		  });
-		await Promise.all([promise1, promise2]);
+		await User.updateOne({ _id: req.user._id }, { $set: { isPremiumUser: true } });
+
 		return res.status(202).json({ success: true, message: "transaction successful" });
 	} catch (error) {
 		console.log(error);
 		res.json({ message: error, success: false });
 	}
 };
+
 const updateTransactionStatusFailed = async (req, res, next) => {
 	try {
 		const { payment_id, order_id } = req.body;
-		const order = await Order.findOne({ orderid: order_id } );
-		await order.updateOne({ paymentid: payment_id, status: "failed" });
+		await Order.updateOne({ orderid: order_id }, { $set: { paymentid: payment_id, status: "failed" } });
 		return res.status(202).json({ success: true, message: "updated successfully" });
 	} catch (error) {
 		console.log(error);
