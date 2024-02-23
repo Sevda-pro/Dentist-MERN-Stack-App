@@ -11,20 +11,21 @@ const OnlineConsultation = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [paymentbtn, setPaymentbtn] = useState(true);
   const [Razorpay] = useRazorpay();
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async(e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+    let obj={
+      name:name,
+      email:email,
+      message:message
+    }
+    let res=await axios.post(`${process.env.REACT_APP_API_KEY}/consultation`,obj, { headers: { Authorization: token } });
+    if(res.status==200)
     setSubmitted(true);
   };
-  async function checkpayment() {
-    const token = localStorage.getItem("token");
-    const res = await axios.get(`${process.env.REACT_APP_API_KEY}/purchase/check`, { headers: { Authorization: token } });
-    if(res.data.response.paymentid!="NULL"){
-      setPaymentSuccess(true);
-      setPaymentbtn(false);
-    }
-  }
   async function paymentProcess(e) {
     try {
+      e.preventDefault();
       const token = localStorage.getItem("token");
 
       const response = await axios.get(`${process.env.REACT_APP_API_KEY}/purchase/premiummembership`, { headers: { Authorization: token } });
@@ -42,6 +43,8 @@ const OnlineConsultation = () => {
             },
             { headers: { Authorization: token } }
           );
+          setPaymentSuccess(true);
+          setPaymentbtn(false);
         },
       };
       const rzp1 = new Razorpay(options);
@@ -57,8 +60,8 @@ const OnlineConsultation = () => {
           { headers: { Authorization: token } }
         );
         alert("something went wrong");
+
       });
-      checkpayment();
     } catch (err) {
       console.log(err)
     }

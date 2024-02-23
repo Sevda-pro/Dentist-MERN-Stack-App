@@ -17,6 +17,7 @@ const BASE_URL = process.env.BASE_URL || 'http://localhost:3000'
 const User = require('./models/signup.js')
 const Appointment=require('./models/appointment.js')
 const premium_route=require('./routes/premium.js')
+const Consultation=require('./models/consultation.js')
 app.use('/purchase',premium_route)
 const authentication = async (req, res, next) => {
     try {
@@ -100,6 +101,16 @@ app.post('/login', async (req, res, next) => {
     } catch (error) {
         res.status(500).json({ message: error, success: false });
     }
+})
+app.post('/consultation',authentication,async(req,res)=>{
+    let obj={
+        name:req.body.name,
+        email:req.body.email,
+        message:req.body.message,
+        customerid:req.user._id
+    }
+    let result=await Consultation.create(obj);
+    res.status(200).json({result:result})
 })
 const apprun = () => {
     connectDB()
