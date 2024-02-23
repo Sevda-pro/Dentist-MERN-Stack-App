@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt=require('jsonwebtoken');
 const User=require('../models/signup')
-const {purchasePremium,updateTransactionStatus,updateTransactionStatusFailed} = require("../controller/premium.js");
+const {purchasePremium,updateTransactionStatus,updateTransactionStatusFailed,check} = require("../controller/premium.js");
 const authentication = async (req, res, next) => {
     try {
 
@@ -19,4 +19,6 @@ const authentication = async (req, res, next) => {
 router.route("/premiummembership").get(authentication, purchasePremium);
 router.route('/updatetransactionstatus/success').post(authentication,updateTransactionStatus)
 router.route('/updatetransactionstatus/failed').post(authentication,updateTransactionStatusFailed)
+router.route("/check").get(authentication,check);
+
 module.exports = router;
