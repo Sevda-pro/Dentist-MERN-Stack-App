@@ -9,6 +9,7 @@ const OnlineConsultation = () => {
   const [question, setQuestion] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const [paymentbtn, setPaymentbtn] = useState(true);
   const [Razorpay] = useRazorpay();
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +17,11 @@ const OnlineConsultation = () => {
   };
   async function checkpayment() {
     const token = localStorage.getItem("token");
-    const response = await axios.get(`${process.env.REACT_APP_API_KEY}/purchase/check`, { headers: { Authorization: token } });
+    const res = await axios.get(`${process.env.REACT_APP_API_KEY}/purchase/check`, { headers: { Authorization: token } });
+    if(res.data.response.paymentid!="NULL"){
+      setPaymentSuccess(true);
+      setPaymentbtn(false);
+    }
   }
   async function paymentProcess(e) {
     try {
@@ -131,8 +136,8 @@ const OnlineConsultation = () => {
               required
             ></textarea>
             <br /><br />
-            <button onClick={paymentProcess}>Payment</button>
-            {/* {paymentSuccess && <button onClick={handleFormSubmit}>Submit</button>} */}
+            {paymentbtn && <button onClick={paymentProcess}>Payment</button>}
+            {paymentSuccess && <button onClick={handleFormSubmit}>Submit</button>}
           </form>
         )}
       </section>

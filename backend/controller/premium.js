@@ -61,8 +61,8 @@ const updateTransactionStatusFailed = async (req, res, next) => {
 };
 const check = async (req, res, next) => {
 	try {
-        let res=await Order.findOne({customerid:req.user._id})
-		res.status(202).json({ success: true, message: "updated successfully" });
+        let response=await Order.findOne({customerid:req.user._id})
+		res.status(202).json({ success: true, result:response });
 	} catch (error) {
 		console.log(error);
 		res.json({ message: error, success: false });
