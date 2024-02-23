@@ -63,10 +63,11 @@ export default function Home() {
         <section>
             <h2>Practice Highlights</h2>
             <p>
-                - State-of-the-art facilities <br />
-                - Friendly and experienced staff <br />
-                - Accepting new patients
-            </p>
+                    - State-of-the-art facilities with the latest dental technology <br />
+                    - Comprehensive range of dental services for individuals and families <br />
+                    - Friendly and experienced staff to address all your dental needs <br />
+                    - Accepting new patients with a focus on personalized care
+                </p>
         </section>
         <footer>
             <div className='footerdiv'>

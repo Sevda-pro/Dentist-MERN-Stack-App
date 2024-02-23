@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Premium = new mongoose.Schema({
+const Payment = new mongoose.Schema({
 	paymentid: {
 		type: String,
 	},
@@ -14,4 +14,4 @@ const Premium = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Premium", Premium);
+module.exports = mongoose.model("Payment", Payment);

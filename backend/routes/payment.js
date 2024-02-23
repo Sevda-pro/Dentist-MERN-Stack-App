@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const jwt=require('jsonwebtoken');
-const User=require('../models/signup')
-const {purchasePremium,updateTransactionStatus,updateTransactionStatusFailed,check} = require("../controller/premium.js");
+const User=require('../models/signup.js')
+const {purchasePremium,updateTransactionStatus,updateTransactionStatusFailed,check} = require("../controller/payment.js");
 const authentication = async (req, res, next) => {
     try {
 
