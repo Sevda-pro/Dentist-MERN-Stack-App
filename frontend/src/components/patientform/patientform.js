@@ -52,13 +52,13 @@ const PatientForms = () => {
                     fill out the necessary forms below before your appointment.
                 </p>
                 <div className="form-links">
-                    <a href="/path/to/intake-form.pdf" target="_blank" rel="noopener noreferrer">
+                    <a href="https://drive.google.com/file/d/17cRSDbQwrup2wqlLTO846-5XnvBS_k9l/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                         Intake Form
                     </a><br /><br />
-                    <a href="/path/to/medical-history-form.pdf" target="_blank" rel="noopener noreferrer">
+                    <a href="https://drive.google.com/file/d/17cRSDbQwrup2wqlLTO846-5XnvBS_k9l/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                         Medical History Form
                     </a><br /><br />
-                    <a href="/path/to/consent-form.pdf" target="_blank" rel="noopener noreferrer">
+                    <a href="https://drive.google.com/file/d/17cRSDbQwrup2wqlLTO846-5XnvBS_k9l/view?usp=sharing" target="_blank" rel="noopener noreferrer">
                         Consent Form
                     </a><br /><br />
                 </div>
