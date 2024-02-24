@@ -17,11 +17,18 @@
     height: 100%;
     background-color: rgb(47, 61, 98);
     transform: rotateY(25deg);
-    /* Apply a 3D rotation effect */
-    transition: all 3s ease;
+    transition: all 1s ease;
     position: absolute;
     top: 20%;
     left: 10%;
+}
+@media (max-width:500px){
+   .shape{
+    width: 50%;
+    height: 70%;
+    left: 5%;
+    transform: rotate(0deg);
+   }
 }
 .formdiv{
     margin-top: 50px;
@@ -59,3 +66,9 @@ width: 80px;
     .loginbtn:hover{
         background-color:rgb(55, 131, 115);
     }
+.alertclass{
+    position: absolute;
+    top: 0%;
+    left: 45%;
+    width: fit-content;
+}
