@@ -2,15 +2,18 @@ import { BrowserRouter as Router, Route, Routes, NavLink, useNavigate } from 're
 import axios from 'axios';
 import './home.css'
 import { IoIosLogOut } from "react-icons/io";
-
+import { useEffect, useState } from 'react';
+import { FaRocket } from "react-icons/fa";
 export default function Home() {
   const navigate=useNavigate();
+  const [loggedIn,setLoggedIn]=useState(true)
   const handlelogoutbtn=async(e)=>{
     e.preventDefault();
      localStorage.clear();
      navigate('/login')
   }
     return (<div>
+
         <header>
       
       <NavLink to="/aboutus" className="navlinkclass">
@@ -53,6 +56,11 @@ export default function Home() {
       <IoIosLogOut size={30}/>
       </NavLink>
     </header>
+    {loggedIn && (
+            <div className="welcome-animation">
+                <p><FaRocket size={20} />Welcome</p>
+            </div>
+        )}
         <section>
             <h2>Welcome to Our Dental Practice</h2>
             <p>
