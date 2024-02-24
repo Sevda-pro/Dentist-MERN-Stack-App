@@ -72,3 +72,8 @@ width: 80px;
     left: 45%;
     width: fit-content;
 }
+.hidebtn{
+    color: aliceblue;
+    cursor: pointer;
+    
+}
