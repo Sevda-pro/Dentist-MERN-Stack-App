@@ -3,7 +3,7 @@ const Order = require('../models/payment.js');
 const User = require('../models/signup.js');
 require('dotenv').config();
 
-const purchasePremium = async (req, res, next) => {
+const purchase = async (req, res, next) => {
 	try {
 		var rzp = new Razorpay({
 			key_id: process.env.PAY_ID,
@@ -59,14 +59,6 @@ const updateTransactionStatusFailed = async (req, res, next) => {
 		res.json({ message: error, success: false });
 	}
 };
-const check = async (req, res, next) => {
-	try {
-        let response=await Order.findOne({customerid:req.user._id})
-		res.status(202).json({ success: true, result:response });
-	} catch (error) {
-		console.log(error);
-		res.json({ message: error, success: false });
-	}
-};
 
-module.exports = { purchasePremium, updateTransactionStatus, updateTransactionStatusFailed,check };
+
+module.exports = { purchase, updateTransactionStatus, updateTransactionStatusFailed};

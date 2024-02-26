@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt=require('jsonwebtoken');
 const User=require('../models/signup.js')
-const {purchasePremium,updateTransactionStatus,updateTransactionStatusFailed,check} = require("../controller/payment.js");
+const {purchase,updateTransactionStatus,updateTransactionStatusFailed} = require("../controller/payment.js");
 const authentication = async (req, res, next) => {
     try {
 
@@ -16,9 +16,8 @@ const authentication = async (req, res, next) => {
         return res.status(401).json({ success: false, message: error });
     }
 };
-router.route("/premiummembership").get(authentication, purchasePremium);
+router.route("/premiummembership").get(authentication, purchase);
 router.route('/updatetransactionstatus/success').post(authentication,updateTransactionStatus)
 router.route('/updatetransactionstatus/failed').post(authentication,updateTransactionStatusFailed)
-router.route("/check").get(authentication,check);
 
 module.exports = router;

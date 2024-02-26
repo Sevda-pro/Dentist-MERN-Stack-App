@@ -5,8 +5,6 @@ const Appointment = new mongoose.Schema({
 	},
     timeslot: {
 		type: String,
-	    required:true,
-		unique: true,
 	},
 	about: {
 		type: String,

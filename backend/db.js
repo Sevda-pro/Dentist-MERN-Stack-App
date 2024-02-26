@@ -3,7 +3,7 @@ require('dotenv').config()
 const connectDB = async () => {
 	try {
 		const conn = await mongoose.connect(
-			`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.jrwj6nb.mongodb.net/dentist`,
+			`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}.jrwj6nb.mongodb.net/dentistapp`,
 		);
 		console.log(`MongoDB Connected`);
 	} catch (error) {

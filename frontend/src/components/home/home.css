@@ -22,7 +22,7 @@
   left: -5%;
   padding: 20px;
   color: #a27777;
-  animation: zigzag 10s ease-in-out forwards;
+  animation: zigzag 10s ease-in forwards;
   animation-iteration-count: 1;
 }
 
